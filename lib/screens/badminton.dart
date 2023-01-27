@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:scorekeeper/constants/colors.dart';
 import 'package:scorekeeper/constants/const.dart';
-import 'package:scorekeeper/constants/custom_container.dart';
 import 'package:scorekeeper/constants/Team.dart';
 
 const double radius = 42;
@@ -22,14 +22,12 @@ class _ShuttleState extends State<Shuttle> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Scaffold(
-      backgroundColor: Colors.white,
-      body: Container(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: Column(
           children: [
             Container(
-              height: 583,
+              height: 383,
               width: 381,
               margin: const EdgeInsets.all(3),
               child: Stack(
@@ -37,26 +35,24 @@ class _ShuttleState extends State<Shuttle> {
                 children: [
                   Align(
                     alignment: Alignment.center,
-                    child: CustomContainer(
-                      bottomleft: radius,
-                      bottomright: radius,
-                      topleft: 0,
-                      topright: 0,
-                      widget: Stack(
-                        alignment: Alignment.topCenter,
-                        children: [
-                          Container(
-                            decoration: const BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(radius),
-                                bottomRight: Radius.circular(radius),
-                              ),
-                            ),
-                            child: const Image(
-                              image: NetworkImage(bg1img),
+                    child: Stack(
+                      alignment: Alignment.topCenter,
+                      children: [
+                        Container(
+                          decoration: const BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(radius),
+                              bottomRight: Radius.circular(radius),
                             ),
                           ),
-                          Align(
+                          child: const Image(
+                            image: NetworkImage(bg1img),
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                        Align(
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 88.0),
                             child: Container(
                               height: 230,
                               width: 331,
@@ -134,7 +130,7 @@ class _ShuttleState extends State<Shuttle> {
                                           padding: EdgeInsets.all(8.0),
                                           child: Team2(
                                             height: 85,
-                                            width: 100,
+                                            width: 106,
                                           ),
                                         ),
                                       ],
@@ -143,17 +139,57 @@ class _ShuttleState extends State<Shuttle> {
                                 ],
                               ),
                             ),
-                          )
-                        ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              height: 373,
+              child: Stack(
+                children: [
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Container(
+                      height: 190,
+                      decoration: BoxDecoration(
+                        color: ConstantColor.indigo700E0,
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(radius),
+                          topRight: Radius.circular(radius),
+                        ),
                       ),
                     ),
                   ),
+                  Align(
+                    alignment: Alignment.topCenter,
+                    child: Container(
+                      height: 250,
+                      width: 331,
+                      decoration: const BoxDecoration(
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(radius),
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                              color: Color.fromARGB(112, 0, 0, 0),
+                              offset: Offset(1, 2),
+                              spreadRadius: 2,
+                              blurRadius: 10),
+                        ],
+                      ),
+                    ),
+                  )
                 ],
               ),
             ),
           ],
         ),
       ),
-    ));
+    );
   }
 }
