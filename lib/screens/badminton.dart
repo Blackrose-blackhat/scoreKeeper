@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:scorekeeper/constants/colors.dart';
 import 'package:scorekeeper/constants/const.dart';
-import 'package:scorekeeper/constants/Team.dart';
+import 'package:scorekeeper/widgets/Team.dart';
+import 'package:scorekeeper/widgets/player_details.dart';
 
 const double radius = 42;
 int counter1 = 0;
@@ -182,8 +183,22 @@ class _ShuttleState extends State<Shuttle> {
                               blurRadius: 10),
                         ],
                       ),
+                      child: Column(
+                        children: const [
+                          Padding(
+                            padding: EdgeInsets.only(top: 8.0),
+                            child: Text('Player Details'),
+                          ),
+                          PlayerDetails(
+                            Avatar1: player1img,
+                            playername: 'Player 1',
+                          ),
+                          PlayerDetails(
+                              playername: 'Player 2', Avatar1: player1img)
+                        ],
+                      ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
