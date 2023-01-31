@@ -9,3 +9,6 @@ const String team2img =
     'https://cdn.britannica.com/13/4413-004-3277D2EF/Flag-Sri-Lanka.jpg';
 const String player1img =
     'https://w7.pngwing.com/pngs/7/618/png-transparent-man-illustration-avatar-icon-fashion-men-avatar-face-fashion-girl-heroes-thumbnail.png';
+int counter1 = 0;
+int counter2 = 0;
+const double radius = 42;
