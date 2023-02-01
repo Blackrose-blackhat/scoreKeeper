@@ -74,7 +74,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
                       onTap: () {
                         Navigator.of(context).pushNamed('/settings');
                       },
-                      child: const Icon(Icons.menu),
+                      child: const Icon(Icons.settings),
                     ),
                   ),
                 ],

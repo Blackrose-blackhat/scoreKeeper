@@ -1,9 +1,15 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
+import 'package:quickalert/models/quickalert_type.dart';
+import 'package:quickalert/widgets/quickalert_dialog.dart';
 import 'package:scorekeeper/constants/colors.dart';
 import 'package:scorekeeper/constants/const.dart';
 import 'package:scorekeeper/widgets/Team.dart';
+import 'package:scorekeeper/widgets/menu_items/settings.dart';
 import 'package:scorekeeper/widgets/player_details.dart';
 import 'package:scorekeeper/widgets/AppBar.dart';
+import 'package:stop_watch_timer/stop_watch_timer.dart';
 
 TextStyle textStyle() {
   return const TextStyle(fontSize: 48);
@@ -17,6 +23,15 @@ class Shuttle extends StatefulWidget {
 }
 
 class _ShuttleState extends State<Shuttle> {
+  final _stopwatctimer = StopWatchTimer();
+  final _isHours = true;
+
+  @override
+  void dispose() {
+    _stopwatctimer.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -63,14 +78,27 @@ class _ShuttleState extends State<Shuttle> {
                                 ),
                                 child: Column(
                                   children: [
-                                    const Align(
+                                    Align(
                                       alignment: Alignment.topCenter,
                                       child: Padding(
-                                        padding: EdgeInsets.all(8.0),
-                                        child: Text(
-                                          'TIMER',
-                                          style: TextStyle(
-                                            fontSize: 23,
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Container(
+                                          child: StreamBuilder<int>(
+                                            stream: _stopwatctimer.rawTime,
+                                            initialData:
+                                                _stopwatctimer.rawTime.value,
+                                            builder: (context, snapshot) {
+                                              final value = snapshot.data;
+                                              final displayTime =
+                                                  StopWatchTimer.getDisplayTime(
+                                                      hours: _isHours, value!);
+                                              return Text(
+                                                displayTime,
+                                                style: const TextStyle(
+                                                    fontSize: 25,
+                                                    color: Colors.black),
+                                              );
+                                            },
                                           ),
                                         ),
                                       ),
@@ -85,9 +113,28 @@ class _ShuttleState extends State<Shuttle> {
                                                 left: 8.0),
                                             child: Team(
                                               ontap: () {
-                                                setState(() {
-                                                  counter1++;
-                                                });
+                                                if (counter1 ==
+                                                    dropdownValue - 1) {
+                                                  setState(() {
+                                                    counter1 = 0;
+                                                  });
+
+                                                  QuickAlert.show(
+                                                    context: context,
+                                                    type: QuickAlertType.custom,
+                                                    barrierDismissible: true,
+                                                    confirmBtnText: 'Okay!',
+                                                    widget:
+                                                        Text('Player 1 won'),
+                                                    //TODO GIF
+                                                  );
+                                                  _stopwatctimer.onExecute.add(
+                                                      StopWatchExecute.stop);
+                                                } else {
+                                                  setState(() {
+                                                    counter1++;
+                                                  });
+                                                }
                                               },
                                               height: 80,
                                               width: 100,
@@ -130,14 +177,57 @@ class _ShuttleState extends State<Shuttle> {
                                               height: 85,
                                               width: 106,
                                               ontap: () {
-                                                setState(() {
-                                                  counter2++;
-                                                });
+                                                if (counter2 ==
+                                                    dropdownValue - 1) {
+                                                  setState(() {
+                                                    counter2 = 0;
+                                                  });
+
+                                                  QuickAlert.show(
+                                                    context: context,
+                                                    type: QuickAlertType.custom,
+                                                    barrierDismissible: true,
+                                                    confirmBtnText: 'Okay!',
+                                                    widget: Column(
+                                                      children: [
+                                                        Text('Player 2 won'),
+                                                      ],
+                                                    ),
+
+                                                    //TODO GIF
+                                                  );
+                                                  _stopwatctimer.onExecute.add(
+                                                      StopWatchExecute.stop);
+                                                } else {
+                                                  setState(() {
+                                                    counter2++;
+                                                  });
+                                                }
                                               },
                                             ),
                                           ),
                                         ],
                                       ),
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            _stopwatctimer.onExecute
+                                                .add(StopWatchExecute.start);
+                                          },
+                                          child: const Text('Start Timer'),
+                                        ),
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            _stopwatctimer.onExecute
+                                                .add(StopWatchExecute.reset);
+                                          },
+                                          child: const Text('Reset Timer'),
+                                        )
+                                      ],
                                     ),
                                   ],
                                 ),
