@@ -102,7 +102,6 @@ class _ShuttleState extends State<Shuttle> {
                                           ),
                                         ),
                                       ),
-                                      //TODO timer
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.only(top: 8.0),
@@ -113,27 +112,42 @@ class _ShuttleState extends State<Shuttle> {
                                                 left: 8.0),
                                             child: Team(
                                               ontap: () {
-                                                if (counter1 ==
-                                                    dropdownValue - 1) {
-                                                  setState(() {
-                                                    counter1 = 0;
-                                                  });
+                                                if (_stopwatctimer.isRunning) {
+                                                  if (counter1 ==
+                                                      dropdownValue - 1) {
+                                                    setState(() {
+                                                      counter1 = 0;
+                                                      counter2 = 0;
+                                                    });
 
+                                                    QuickAlert.show(
+                                                      context: context,
+                                                      type:
+                                                          QuickAlertType.custom,
+                                                      barrierDismissible: true,
+                                                      confirmBtnText: 'Okay!',
+                                                      widget:
+                                                          Text('Player 1 won'),
+                                                      //TODO GIF
+                                                    );
+                                                    _stopwatctimer.onExecute
+                                                        .add(StopWatchExecute
+                                                            .stop);
+                                                  } else {
+                                                    setState(() {
+                                                      counter1++;
+                                                    });
+                                                  }
+                                                } else {
                                                   QuickAlert.show(
                                                     context: context,
-                                                    type: QuickAlertType.custom,
+                                                    type: QuickAlertType.error,
                                                     barrierDismissible: true,
                                                     confirmBtnText: 'Okay!',
-                                                    widget:
-                                                        Text('Player 1 won'),
+                                                    widget: const Text(
+                                                        'Please start the timer first'),
                                                     //TODO GIF
                                                   );
-                                                  _stopwatctimer.onExecute.add(
-                                                      StopWatchExecute.stop);
-                                                } else {
-                                                  setState(() {
-                                                    counter1++;
-                                                  });
                                                 }
                                               },
                                               height: 80,
@@ -181,6 +195,7 @@ class _ShuttleState extends State<Shuttle> {
                                                     dropdownValue - 1) {
                                                   setState(() {
                                                     counter2 = 0;
+                                                    counter1 = 0;
                                                   });
 
                                                   QuickAlert.show(
@@ -209,26 +224,6 @@ class _ShuttleState extends State<Shuttle> {
                                         ],
                                       ),
                                     ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                      children: [
-                                        ElevatedButton(
-                                          onPressed: () {
-                                            _stopwatctimer.onExecute
-                                                .add(StopWatchExecute.start);
-                                          },
-                                          child: const Text('Start Timer'),
-                                        ),
-                                        ElevatedButton(
-                                          onPressed: () {
-                                            _stopwatctimer.onExecute
-                                                .add(StopWatchExecute.reset);
-                                          },
-                                          child: const Text('Reset Timer'),
-                                        )
-                                      ],
-                                    ),
                                   ],
                                 ),
                               ),
@@ -253,6 +248,39 @@ class _ShuttleState extends State<Shuttle> {
                           borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(radius),
                             topRight: Radius.circular(radius),
+                          ),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 28.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              ElevatedButton(
+                                onPressed: () {
+                                  _stopwatctimer.onExecute
+                                      .add(StopWatchExecute.start);
+                                },
+                                child: const Text('Start Timer'),
+                              ),
+                              ElevatedButton(
+                                onPressed: () {
+                                  _stopwatctimer.onExecute
+                                      .add(StopWatchExecute.stop);
+                                },
+                                child: const Text('Pause Timer'),
+                              ),
+                              ElevatedButton(
+                                onPressed: () {
+                                  _stopwatctimer.onExecute
+                                      .add(StopWatchExecute.reset);
+                                  setState(() {
+                                    counter1 = 0;
+                                    counter2 = 0;
+                                  });
+                                },
+                                child: const Text('Reset Timer'),
+                              ),
+                            ],
                           ),
                         ),
                       ),
