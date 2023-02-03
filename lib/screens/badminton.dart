@@ -127,7 +127,7 @@ class _ShuttleState extends State<Shuttle> {
                                                       barrierDismissible: true,
                                                       confirmBtnText: 'Okay!',
                                                       widget:
-                                                          Text('Player 1 won'),
+                                                          Image.asset(team1img),
                                                       //TODO GIF
                                                     );
                                                     _stopwatctimer.onExecute
@@ -304,17 +304,19 @@ class _ShuttleState extends State<Shuttle> {
                           ],
                         ),
                         child: Column(
-                          children: const [
-                            Padding(
+                          children: [
+                            const Padding(
                               padding: EdgeInsets.only(top: 8.0),
                               child: Text('Player Details'),
                             ),
                             PlayerDetails(
                               Avatar1: player1img,
-                              playername: 'Player 1',
+                              playername: '',
                             ),
                             PlayerDetails(
-                                playername: 'Player 2', Avatar1: player2img)
+                              playername: '',
+                              Avatar1: player2img,
+                            ),
                           ],
                         ),
                       ),

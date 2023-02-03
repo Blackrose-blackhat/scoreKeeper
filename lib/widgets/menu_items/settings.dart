@@ -4,8 +4,6 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 import 'package:scorekeeper/constants/const.dart';
 
-import '../CustomTextForm.dart';
-
 class Settings extends StatefulWidget {
   const Settings({super.key});
 
@@ -28,6 +26,7 @@ class _SettingsState extends State<Settings> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
                 'Settings',
@@ -46,7 +45,6 @@ class _SettingsState extends State<Settings> {
         body: Padding(
           padding: const EdgeInsets.all(11.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
                 children: [
@@ -78,16 +76,6 @@ class _SettingsState extends State<Settings> {
                   ),
                 ],
               ),
-              const Align(
-                alignment: Alignment.topLeft,
-                child: Text(
-                  'Player details:',
-                ),
-              ),
-              const CustomTextInput(
-                textEditinLabel: 'Player 1 details',
-              ),
-              const CustomTextInput(textEditinLabel: 'Player 2 details')
             ],
           ),
         ),

@@ -14,6 +14,3 @@ int counter2 = 0;
 const double radius = 42;
 int dropdownValue = 2;
 var items = [2, 4, 6, 8];
-
-String player1name = '';
-String player2name = '';

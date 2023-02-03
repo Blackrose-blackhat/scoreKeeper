@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:scorekeeper/constants/const.dart';
 
 class PlayerDetails extends StatelessWidget {
@@ -26,8 +28,20 @@ class PlayerDetails extends StatelessWidget {
         Container(
           height: 50,
           alignment: Alignment.bottomCenter,
-          child: Text(
-            playername,
+          child: Container(
+            width: 170,
+            child: TextField(
+              onChanged: (String newText) {
+                if (newText.isNotEmpty) {
+                  SemanticsService.announce(
+                      '\$$newText', Directionality.of(context));
+                }
+              },
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: 'Enter Player name',
+              ),
+            ),
           ),
         ),
       ],
