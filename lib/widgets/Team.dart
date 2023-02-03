@@ -19,9 +19,14 @@ class Team extends StatelessWidget {
       width: width,
       child: GestureDetector(
         onTap: ontap,
-        child: const Image(
-          image: NetworkImage(team1img),
-          fit: BoxFit.fill,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(12),
+          child: const Image(
+            image: AssetImage(
+              team1img,
+            ),
+            fit: BoxFit.fill,
+          ),
         ),
       ),
     );
@@ -45,9 +50,12 @@ class Team2 extends StatelessWidget {
       width: width,
       child: GestureDetector(
         onTap: ontap,
-        child: const Image(
-          image: NetworkImage(team2img),
-          fit: BoxFit.fill,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(12),
+          child: const Image(
+            image: AssetImage(team2img),
+            fit: BoxFit.fill,
+          ),
         ),
       ),
     );

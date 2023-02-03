@@ -25,7 +25,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
           height: 230,
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: NetworkImage(bg1img),
+              image: AssetImage(bgImg),
               fit: BoxFit.fill,
             ),
           ),
@@ -58,6 +58,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
                   ),
                   Container(
                     width: 45,
+                    height: 45,
                     decoration: const BoxDecoration(
                       color: Color.fromARGB(255, 255, 255, 255),
                       borderRadius: BorderRadius.all(

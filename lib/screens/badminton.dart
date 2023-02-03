@@ -150,8 +150,8 @@ class _ShuttleState extends State<Shuttle> {
                                                   );
                                                 }
                                               },
-                                              height: 80,
-                                              width: 100,
+                                              height: 91,
+                                              width: 101,
                                             ),
                                           ),
                                           Padding(
@@ -188,7 +188,7 @@ class _ShuttleState extends State<Shuttle> {
                                           Padding(
                                             padding: const EdgeInsets.all(8.0),
                                             child: Team2(
-                                              height: 85,
+                                              height: 91,
                                               width: 106,
                                               ontap: () {
                                                 if (counter2 ==
@@ -314,7 +314,7 @@ class _ShuttleState extends State<Shuttle> {
                               playername: 'Player 1',
                             ),
                             PlayerDetails(
-                                playername: 'Player 2', Avatar1: player1img)
+                                playername: 'Player 2', Avatar1: player2img)
                           ],
                         ),
                       ),

@@ -20,7 +20,7 @@ class PlayerDetails extends StatelessWidget {
           padding: const EdgeInsets.only(top: 25.0),
           child: CircleAvatar(
             radius: 28,
-            backgroundImage: NetworkImage(Avatar1),
+            backgroundImage: AssetImage(Avatar1),
           ),
         ),
         Container(

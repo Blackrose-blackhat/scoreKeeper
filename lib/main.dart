@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         ),
         iconTheme: const IconThemeData(
           color: Color.fromARGB(255, 0, 0, 0),
-          size: 41,
+          size: 31,
         ),
       ),
       home: Shuttle(),
